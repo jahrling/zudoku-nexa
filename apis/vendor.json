@@ -1,0 +1,196 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+      "title": "Vendor",
+      "version": "1.0"
+  },
+  "servers": [
+      {
+          "url": "http://test-nexa-apim.azure-api.net"
+      },
+      {
+          "url": "https://test-nexa-apim.azure-api.net"
+      }
+  ],
+  "paths": {
+      "/api/usage/water": {
+          "get": {
+              "tags": [
+                  "Usage"
+              ],
+              "summary": "Get Water Usage.",
+              "description": "Get Water Usage.",
+              "operationId": "get-api-usage-water-startdatetime-startdatetime-enddatetime-enddatetime",
+              "parameters": [
+                  {
+                      "name": "StartDateTime",
+                      "in": "query",
+                      "description": "Format - date-time (as date-time in RFC3339).",
+                      "required": true,
+                      "schema": {
+                          "type": "string",
+                          "format": "date-time"
+                      }
+                  },
+                  {
+                      "name": "EndDateTime",
+                      "in": "query",
+                      "description": "Format - date-time (as date-time in RFC3339).",
+                      "required": true,
+                      "schema": {
+                          "type": "string",
+                          "format": "date-time"
+                      }
+                  },
+                  {
+                      "name": "resourceIds",
+                      "in": "query",
+                      "schema": {
+                          "type": "array",
+                          "items": {
+                              "type": "string"
+                          }
+                      }
+                  },
+                  {
+                      "name": "organizationIds",
+                      "in": "header",
+                      "required": true,
+                      "schema": {
+                          "type": "array",
+                          "items": {
+                              "type": "string",
+                              "format": "uuid"
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "application/json": {
+                              "schema": {
+                                  "$ref": "#/components/schemas/Vendor.Models.VendorApi.WaterUsageDto"
+                              }
+                          }
+                      }
+                  },
+                  "400":{
+                  "description": "Bad Request"
+                  }
+              }
+          }
+      },
+      "/api/status": {
+          "get": {
+              "tags": [
+                  "Vendor"
+              ],
+              "summary": "Health status",
+              "operationId": "Health-status",
+              "responses": {
+                  "200": {
+                      "description": "OK",
+                      "content": {
+                          "text/plain": {
+                              "schema": {
+                                  "type": "string"
+                              },
+                              "examples": {
+                                  "default": {
+                                      "value": null
+                                  }
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  },
+  "components": {
+      "schemas": {
+          "Vendor.Models.VendorApi.WaterUsageDto": {
+              "type": "object",
+              "properties": {
+                  "startDateTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2024-10-22T15:38:08.645Z"
+                  },
+                  "endDateTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example":"2024-10-22T15:38:08.645Z"
+                  },
+                  "waterResources": {
+                      "type": "array",
+                      "items": {
+                          "$ref": "#/components/schemas/Vendor.Models.VendorApi.WaterUsageResourceDto"
+                      },
+                      "nullable": true
+                  }
+              },
+              "additionalProperties": false
+          },
+          "Vendor.Models.VendorApi.WaterUsageResourceDto": {
+              "type": "object",
+              "properties": {
+                  "id": {
+                      "type": "string",
+                      "nullable": true,
+                      "example":"monnit-123456"
+                  },
+                  "tag": {
+                      "type": "string",
+                      "nullable": true,
+                      "example":"flowmeter"
+                  },
+                  "datapointName": {
+                      "type": "string",
+                      "nullable": true,
+                      "example":"FlowVolume"
+                  },
+                  "datapointValue": {
+                      "type": "number",
+                      "format": "double",
+                      "nullable": true,
+                      "example": 14
+                  },
+                  "uom": {
+                      "type": "string",
+                      "nullable": true,
+                      "example":"GAL"
+                  },
+                  "eventDateTime": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example":"2024-10-22T15:38:08.645Z"
+                  }
+              },
+              "additionalProperties": false
+          }
+      },
+      "securitySchemes": {
+          "apiKeyHeader": {
+              "type": "apiKey",
+              "name": "Ocp-Apim-Subscription-Key",
+              "in": "header"
+          },
+          "apiKeyQuery": {
+              "type": "apiKey",
+              "name": "subscription-key",
+              "in": "query"
+          }
+      }
+  },
+  "security": [
+      {
+          "apiKeyHeader": []
+      },
+      {
+          "apiKeyQuery": []
+      }
+  ]
+}
