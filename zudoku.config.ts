@@ -5,8 +5,8 @@ const config: ZudokuConfig = {
       pageTitle: "Documentations",
       logo: {
         src: {
-          light: "/logos/nexa_logo.svg",
-          dark: "/logos/nexa_logo.svg"
+          light: "/public/logos/nexa_logo.svg",
+          dark: "/public/logos/nexa_logo.svg"
         },
         "width": "99px"
       }
