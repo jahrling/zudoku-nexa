@@ -46,6 +46,7 @@ const config: ZudokuConfig = {
   docs: {
     files: "/pages/**/*.{md,mdx}",
   },
+  basePath: "/zudoku-nexa",
 };
 
 export default config;
