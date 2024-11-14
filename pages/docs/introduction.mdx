@@ -1,7 +1,8 @@
 ---
 title: Welcome to Nexa
 ---
-<img src="https://app.nexaplatform.com/nexa_logo.svg" alt="drawing" width="600"/>
+<img src="https://app.nexaplatform.com/nexa_logo.svg" alt="drawing" width="400"/>
+
 **Where Insight Meets Action**  
 Nexa integrates advanced sensing technology with your property, providing non-invasive monitoring of plumbing components. Our solution measures temperature, detects leaks, monitors pressure, and more.
 
@@ -11,13 +12,16 @@ Nexa integrates advanced sensing technology with your property, providing non-in
 - **Integration**: Non-invasive attachment to plumbing components.
 - **Metrics**: Measures various parameters including:
   - Temperature
-  - Leak detection
-  - Pressure monitoring
-  - Water Volume
+  - Leaks
+  - Pressure
+  - Water Flow and Volume
+- **Equipment**: Connect to specific Watts controllers to view and manage 
 
 ### Nexa Software
-- **Real-Time Data**: Connects to your sensors to provide live system data.
-- **Insight Generation**: Uncovers hidden insights within your water system.
+- **Real-Time Data**: Connect to your sensors to provide live system data in the cloud as fast as every minute (sometimes faster for select equipment)
+- **Live System Schematic**: Understand the relationships between data sources and your water system to apply contextual meaning
+- **Data Visualization**: Chart any data point against another, show when alerts are active, and export your data as needed
+- **Insight Generation**: Uncover hidden insights within your water system to help your team drive action
 - **Issue Resolution**: Identify inefficiencies and troubleshoot problems.
 
 ## Benefits
@@ -26,24 +30,52 @@ With Nexa, you can:
 - Enhance operational efficiency by leveraging real-time insights.
 - Proactively resolve issues before they escalate.
 
-## Getting Started 
+## Getting Started
 
-### Installation
+<font color="red"> ### Installation
 1. **Set Up Sensors**: Attach the Nexa sensing technology to your plumbing components.
 2. **Connect to Software**: Install the Nexa software to begin receiving data.
 
-### Usage
+<font color="red"> ### Usage
 1. Access the Nexa dashboard to view real-time data.
 2. Monitor key metrics and receive alerts for any detected issues.
 
-## Integrations
-1. Leverage realtime analytics webhooks into your own application from the Nexa platform.
-2. Request Telemetry data from our Suite of developer grade API's.
+</font></font>
+
+## Data Integration
+We understand the need for a single pane of glass (SPOG) experience for all the devices that you have within your property or portfolio of properties. Your data is available for integration by way of webhook or API. Contact your Nexa customer success manager (CSM) in order to activate this feature for your organization.
+
+### Webhook integration
+1. Log in as an organization admin
+2. Navigate to the Settings page and then to the Integration tab
+<img src="https://app.nexaplatform.com/help/Webhook1.png" alt="Settings page no webhook" width="500"/>
+3. Click on **Create New Webhook**
+4. Complete the form
+<img src="https://app.nexaplatform.com/help/Webhook2.png" alt="Webhook settings" width="500"/>
+- The *Webhook Manager* is the email where any notifications about the webhook should be sent.
+- The *Base URL* is where the webhook payload will be sent
+- *Frequency* is how often you want to receive telemetry, ranging from 1 hour to 1 week. Payloads start being sent 10 minutes after the webhook is created.
+5. Create a key-value pair for the telemetry header if your receiving platform requires it. Click *Add Key* to add one or multiple key-value pairs. These may not be blank, so delete them using the trash icon if not in use.
+6. *Data Configuration* allows you to set what data you want as part of the webhook for the most recent time period as set by the *Frequency*. Options are:
+- All individual flow meters: send the accumulated volumes for each individual flow meter 
+- Total organization volume: send the accumulated volume for the whole organization as a sum of the selected flow meters for your organization. Note that these are selected on the Home page by editing *Water Usage*
+<img src="https://app.nexaplatform.com/help/Webhook3.png" alt="Select org flow meters" width="500"/>
+7. Select *Create* to complete creating your webhook.
+
+#### Troubleshooting webhooks
+| Topic | Potential cause |
+|--|--|
+| 1. No payloads received | A. Verify that the base URL is correct in the webhook settings page for the webhook you configured. <br> B. Verify that the header key-value pair(s) is/are correct and allowable in the receiving system. <br> C. Verify your system's security policies to allow for payloads from nexaplatform.com . <br> D. Check whether the webhook has been suspended. 10 failed deliveries will result in the webhook being suspended and it will need to be manually re-enabled on the *Integrations* tab in *Settings*.
+| 2. Volumes do not match expectations | A. Check the webhook's frequency and payload's timestamps relative to your reference point. It is best to do this relative to the data within the Nexa analytics page for the selected sensors. <br> B. Check that the selected flow meters are correct. For *Total Organization Volume*, confirm that the selected flow meters for your organization on the Home page by editing *Water Usage*.
+| 3. Missing flow meter data | A. Investigate whether the flow meter has lost communication for certain periods. Missing data will be sent to the local gateway and then to the Nexa cloud once it reconnects. The missing data will be delivered via webhook with the appropriate timestamps. Note that for a single sensor with a heartbeat of 15min, there is sufficient storage for 40 weeks on a line-powered gateway. <br> B. Check that the selected flow meters are correct. For *Total Organization Volume*, confirm that the selected flow meters for your organization on the Home page by editing *Water Usage*. |
+
+### API integration
+
+
+#### Troubleshooting APIs 
 
 ## Support
 For further assistance, please visit our [support page](https://www.nexaplatform.com/support) or contact us at [support@nexaplatform.com](mailto:support@nexaplatform.com).
 
 ## Contributing
 We welcome contributions! For guidelines on how to contribute, please refer to our [contributing page](https://www.nexaplatform.com/contributing).
-
-
